@@ -1,4 +1,4 @@
-api_endpoint: central-stackrox.apps.home.ocplab.com
+api_endpoint: placeholder.com
 # change if the UI is hosted on a different endpoint:
 ui_endpoint: "{{ api_endpoint }}"
 
@@ -6,8 +6,8 @@ auth_provider: {name: OpenShift, type: openshift}
 default_auth_provider_role: None
 
 permission_sets:
-  - name: Namespace Adminstrator
-    description: A user that is an administrator of one or namespaces across various clusters
+  - name: Namespace Administrator
+    description: A user that is an administrator of one or more namespaces across various clusters
     resourceToAccess:
       APIToken: READ_WRITE_ACCESS
       Alert: READ_ACCESS
