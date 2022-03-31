@@ -1,22 +1,28 @@
 ### Introduction
 
-This is an ansible playbook for configuring Red Hat Advanced Cluster Security (i.e. Stackrox). Specifically this configures an openshift authentication provider along with setting up user access to ACS in terms of access scopes and permission sets.
+This is an ansible playbook for configuring Red Hat Advanced Cluster Security (i.e. Stackrox). Specifically this configures an OpenShift authentication provider along with setting up user access to ACS in terms of access scopes and permission sets.
 
 The playbook uses the uri module to drive the ACS API, the configuration that is created is managed the variables in vars/vars.yaml.
 
 ### Using
 
-You can invoke the playbook by passing either username/password or API token to the playbook. To use it with the default Central username/password:
+You can invoke the playbook by passing either username/password or API token to the playbook.
 
-```ansible-playbook acs.yaml -e username=admin -e password=XXXXXX -e api_endpoint=central-stackrox.apps.home.ocplab.com```
+```shell
+# To use it with the default Central username/password:
+ansible-playbook acs.yaml -e username=admin -e password=$ADMIN_PASSWORD -e api_endpoint=$ACS_API_ENDPOINT
 
-To invoke it with an API token created in ACS:
 
-```ansible-playbook acs.yaml -e api_token=XXXXXXX -e api_endpoint=central-stackrox.apps.home.ocplab.com```
+# To invoke it with an API token created in ACS:
+ansible-playbook acs.yaml -e api_token=$ACS_API_TOKEN -e api_endpoint=$ACS_API_ENDPOINT
+
+# NOTE: To obtain the ACS API token, go to https://<acs_ui_endpoint>/main/integrations/authProviders/apitoken. Either use an existing one, or create a new one.
+```
+
 
 ### Integrating with GitOps
 
-Integrating this automation with an existing installation of ACS via Argo CD is very straightfoward:
+Integrating this automation with an existing installation of ACS via Argo CD is very straight foward:
 
 1. Fork the repo and update the `vars/vars.yaml` to reflect the configuration that you want
 
