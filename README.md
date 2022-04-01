@@ -10,13 +10,13 @@ You can invoke the playbook by passing either username/password or API token to 
 
 ```shell
 # To use it with the default Central username/password:
-ansible-playbook acs.yaml -e username=admin -e password=$ADMIN_PASSWORD -e api_endpoint=$ACS_API_ENDPOINT
+ansible-playbook acs.yaml -e username=admin -e password=$ADMIN_PASSWORD -e api_endpoint=$ACS_API_ENDPOINT -e project_set=xxx
 
 # test out if API token works:
-ansible-playbook acs.yaml -e api_token=$ACS_API_TOKEN -e api_endpoint=$ACS_API_ENDPOINT
+ansible-playbook acs.yaml -e api_token=$ACS_API_TOKEN -e api_endpoint=$ACS_API_ENDPOINT -e project_set=xxx
 
 # To invoke it with an API token created in ACS:
-ansible-playbook acs.yaml -e activity=acs_config -e api_token=$ACS_API_TOKEN -e api_endpoint=$ACS_API_ENDPOINT
+ansible-playbook acs.yaml -e activity=acs_config -e api_token=$ACS_API_TOKEN -e api_endpoint=$ACS_API_ENDPOINT -e project_set=xxx
 
 ```
 
