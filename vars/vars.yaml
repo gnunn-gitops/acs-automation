@@ -34,7 +34,7 @@ access_scopes:
 roles:
   - name: Product Catalog Admins
     description: Administrators of product catalog namespaces
-    permission_set: Namespace Adminstrator
+    permission_set: Namespace Admin
     access_scope: product-catalog-admins
     global_access: NO_ACCESS
 
