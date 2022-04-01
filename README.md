@@ -6,17 +6,18 @@ The playbook uses the uri module to drive the ACS API, the configuration that is
 
 ### Using
 
-You can invoke the playbook by passing either username/password or API token to the playbook.
+You can invoke the playbook by passing either username/password or API token to the playbook. To obtain the ACS API token, go to https://<acs_ui_endpoint>/main/integrations/authProviders/apitoken. Either use an existing one, or create a new one.
 
 ```shell
 # To use it with the default Central username/password:
 ansible-playbook acs.yaml -e username=admin -e password=$ADMIN_PASSWORD -e api_endpoint=$ACS_API_ENDPOINT
 
-
-# To invoke it with an API token created in ACS:
+# test out if API token works:
 ansible-playbook acs.yaml -e api_token=$ACS_API_TOKEN -e api_endpoint=$ACS_API_ENDPOINT
 
-# NOTE: To obtain the ACS API token, go to https://<acs_ui_endpoint>/main/integrations/authProviders/apitoken. Either use an existing one, or create a new one.
+# To invoke it with an API token created in ACS:
+ansible-playbook acs.yaml -e activity=acs_config -e api_token=$ACS_API_TOKEN -e api_endpoint=$ACS_API_ENDPOINT
+
 ```
 
 
@@ -51,3 +52,18 @@ platform.stackrox.io/Central:
 Here is a diagram of how it works with Argo CD.
 
 ![GitOps Flow](docs/img/gitops-flow.png)
+
+
+### TODOs:
+playbook work:
+- ACS instance config for CCM:
+    - authprovider
+    - permission set, access scope
+- split the playbook into 2 parts (?)
+    - ACS configs
+    - team access grant (the role mapping)
+
+GitOps and OpenShift integration
+    - argoCD post-sync hook
+    - create CCM stuff: service account, build and job template
+
