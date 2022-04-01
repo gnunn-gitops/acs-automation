@@ -1,5 +1,7 @@
 ---
-# custom permission sets:
+# ---- custom permission sets ----
+# - Ministry Admin
+# - Namespace Admin
 custom_permission_sets:
   - name: Namespace Admin
     description: A user that is an administrator of one or more namespaces across various clusters.
@@ -98,3 +100,102 @@ custom_permission_sets:
       VulnerabilityManagementRequests: READ_WRITE_ACCESS
       VulnerabilityReports: READ_WRITE_ACCESS
       WatchedImage: READ_WRITE_ACCESS
+
+
+# ---- custom access scope ----
+# - for each Ministry
+custom_access_scopes:
+  - description: Access to all AG and PSSG namespaces
+    name: All AG PSSG
+    rules:
+      clusterLabelSelectors:
+      - requirements:
+        - key: clusterName
+          op: IN
+          values:
+          - SILVER
+          - GOLD
+          - GOLDDR
+          - KLAB
+          - CLAB
+      includedClusters: []
+      includedNamespaces: []
+      namespaceLabelSelectors:
+      - requirements:
+        - key: ministry_id
+          op: IN
+          values:
+          - AG
+          - PSSG
+  - description: All NRM namespaces
+    name: All NRM
+    rules:
+      clusterLabelSelectors:
+      - requirements:
+        - key: clusterName
+          op: IN
+          values:
+          - SILVER
+          - GOLD
+          - GOLDDR
+          - KLAB
+          - CLAB
+      includedClusters: []
+      includedNamespaces: []
+      namespaceLabelSelectors:
+      - requirements:
+        - key: ministry_id
+          op: IN
+          values:
+          - EMPR
+          - FLNR
+          - ENV
+          - EAO
+  - description: All Social Sector namespaces
+    name: All Social Sector
+    rules:
+      clusterLabelSelectors:
+      - requirements:
+        - key: clusterName
+          op: IN
+          values:
+          - SILVER
+          - GOLD
+          - GOLDDR
+          - KLAB
+          - CLAB
+      includedClusters: []
+      includedNamespaces: []
+      namespaceLabelSelectors:
+      - requirements:
+        - key: ministry_id
+          op: IN
+          values:
+          - SDPR
+          - MCF
+
+# ---- custom roles ----
+# - each Ministry Security team
+# - OCIO ISB SecOps
+# NOTE: use - for concatenation as this object does not have ID
+custom_roles:
+  - name: Security-OCIO-ISB-SecOps
+    description: Access for InfoSec Branch and Security Operations
+    access_scope: Unrestricted
+    permission_set: Analyst
+    global_access: NO_ACCESS
+  - name: Security-AG-PSSG
+    description: Access for AG and PSSG Security team members
+    access_scope: All AG PSSG
+    permission_set: Ministry Admin
+    global_access: NO_ACCESS
+  - name: Security-NRM
+    description: NRM Security team access
+    access_scope: All NRM
+    permission_set: Ministry Admin
+    global_access: NO_ACCESS
+  - name: Security-Social-Sector
+    description: Social Sector Security team role
+    access_scope: All Social Sector
+    permission_set: Ministry Admin
+    global_access: NO_ACCESS
