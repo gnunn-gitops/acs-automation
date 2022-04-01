@@ -14,18 +14,18 @@ default_auth_provider_role: None
 
 # Namespace Admin Access Scope
 access_scope:
-- name: "project-set-{{ project_set }}"
-  description: Application Team Access
-  rules:
-    includedClusters: []
-    includedNamespaces: []
-    clusterLabelSelectors: []
-    namespaceLabelSelectors:
-    - requirements:
-      - key: name
-        op: IN
-        values:
-        - project_set
+  - name: "project-set-{{ project_set }}"
+    description: Application Team Access
+    rules:
+      includedClusters: []
+      includedNamespaces: []
+      clusterLabelSelectors: []
+      namespaceLabelSelectors:
+      - requirements:
+        - key: name
+          op: IN
+          values:
+          - project_set
 
 # role = Namespace Admin level Permission Set & Access Scope
 role:
